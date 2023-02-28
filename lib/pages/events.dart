@@ -226,43 +226,42 @@ class _EventCardsState extends State<EventCards> {
                 SizedBox(height: 120.0,),
                 PageHeading(title: 'EVENTS'),
                 SubHeadings(title: '${months[current_mon-1]}',),
-                Expanded(
-                  child: StreamBuilder(
-                    stream: _firestore.collection('clubs').snapshots(),
-                    builder: (context,snapshot){
-                      if(!snapshot.hasData){
-                        return Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: Colors.greenAccent,
-                          ),
-                        );
-                      }
-                      final messages = snapshot.data.docs;
-                      List<MessageBubble> messageBubbles=[];
-                      for(var message in messages){
-                        final img = message.data()['img'];
-                        final name = message.data()['name'];
-                        final venue = message.data()['venue'];
-                        final participants = message.data()['participants'];
-                        final desc = message.data()['desc'];
-                        final time = message.data()['time'];
-                        final cname = message.data()['cname'];
-                        final date = message.data()['date'];
-                        final logo = message.data()['logo'];
-                        final currentUser =loggedInUser.email;
-                        final card = MessageBubble(img: img, desc: desc, name : name,venue: venue,participants:participants,time: time,logo: logo,cname: cname,date: date,
-                        );
-                        messageBubbles.add(card);
-                      }
-
-                      return Expanded(
-                        child: ListView(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
-                          children: messageBubbles,
+                StreamBuilder(
+                  stream: _firestore.collection('clubs').snapshots(),
+                  builder: (context,snapshot){
+                    if(!snapshot.hasData){
+                      return Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.greenAccent,
                         ),
                       );
-                    },
-                  ),
+                    }
+                    final messages = snapshot.data.docs;
+                    List<MessageBubble> messageBubbles=[];
+                    for(var message in messages){
+                      final img = message.data()['img'];
+                      final name = message.data()['name'];
+                      final venue = message.data()['venue'];
+                      final participants = message.data()['participants'];
+                      final desc = message.data()['desc'];
+                      final time = message.data()['time'];
+                      final cname = message.data()['cname'];
+                      final date = message.data()['date'];
+                      final logo = message.data()['logo'];
+                      final currentUser =loggedInUser.email;
+                      final card = MessageBubble(img: img, desc: desc, name : name,venue: venue,participants:participants,time: time,logo: logo,cname: cname,date: date,
+                      );
+                      messageBubbles.add(card);
+                    }
+
+                    return Expanded(
+                      child: ListView(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
+                        children: messageBubbles,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
