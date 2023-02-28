@@ -81,7 +81,7 @@ class _DamnTimeState extends State<DamnTime> {
             },
             items: <BottomNavyBarItem>[
               BottomNavyBarItem(
-                title: Text('Events'),
+                title: Text('Events',style: TextStyle(fontFamily: 'Cubano',fontWeight: FontWeight.w100),),
                 // icon: Icon(Icons.home),
                 icon: Icon(
                   Icons.calendar_today_rounded,
@@ -92,7 +92,7 @@ class _DamnTimeState extends State<DamnTime> {
                 inactiveColor: Colors.white,
               ),
               BottomNavyBarItem(
-                title: Text('Clubs'),
+                title: Text('Clubs',style: TextStyle(fontFamily: 'Cubano',fontWeight: FontWeight.w100),),
                 // icon: Icon(Icons.library_books),
                 icon: Icon(
                   Icons.list_alt_rounded,
@@ -103,7 +103,7 @@ class _DamnTimeState extends State<DamnTime> {
                 inactiveColor: Colors.white,
               ),
               BottomNavyBarItem(
-                title: Text('Notifications'),
+                title: Text('Notifications',style: TextStyle(fontFamily: 'Cubano',fontWeight: FontWeight.w100,fontSize: 10),),
                 // icon: Icon(Icons.stars),
                 icon: Icon(
                   Icons.notifications_active_rounded,

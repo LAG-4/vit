@@ -64,8 +64,7 @@ class _EventApprovalState extends State<EventApproval> {
         //       colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.15), BlendMode.darken)
         //   ),
         // ),//BACKGROUND IMAGE
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
           children: [
             SizedBox(height: 120,),
             SubHeadings(title: 'PERMISSIONS',),
@@ -118,9 +117,7 @@ class _EventApprovalState extends State<EventApproval> {
                 }
 
                 return Expanded(
-                  child: ListView(
-
-                    padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
+                  child: Column(
                     children: messageBubbles,
                   ),
                 );
@@ -156,8 +153,7 @@ class _EventApprovalState extends State<EventApproval> {
                 }
 
                 return Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
+                  child: Column(
                     children: messageBubbles,
                   ),
                 );

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_sheet_db/components/pageheading.dart';
 import 'package:google_sheet_db/components/subheadings.dart';
+import 'package:google_sheet_db/pages/chapterspage.dart';
 import 'package:google_sheet_db/pages/events.dart';
 import 'package:google_sheet_db/pages/individual_club.dart';
+import 'package:google_sheet_db/pages/nontechnicalpage.dart';
 import 'account.dart';
 import 'clubinfo.dart';
-import 'clubsolo.dart';
+import 'technicalpage.dart';
 import 'navbar.dart';
 
 class ClubChapter extends StatelessWidget {
@@ -14,6 +16,10 @@ class ClubChapter extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        textTheme: TextTheme(),
+        iconTheme: IconThemeData(
+            color: Colors.black
+        ),
         automaticallyImplyLeading: false,
         elevation: 0,
         title:Column(
@@ -26,21 +32,15 @@ class ClubChapter extends StatelessWidget {
                 colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
               ).createShader(bounds),
               child: Text('VIT-AP',style: TextStyle(
-                  fontFamily: 'Kavoon',fontSize: 19
+                  fontFamily: 'Cubano',fontSize: 19
               ),
               ),
             ),
-            Text('EVENTS',style: TextStyle(fontFamily: 'Poppins',fontSize: 10.0,fontWeight: FontWeight.bold,shadows: <Shadow>[
-              Shadow(
-                offset: Offset(3.0, 1.0),
-                blurRadius: 15.0,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),]),)
+            Text('EVENTS',style: TextStyle(fontFamily: 'Poppins',fontSize: 10.0,fontWeight: FontWeight.bold,),)
           ],
         ),
         backgroundColor: Colors.transparent,
         actions: [
-          SizedBox(width: 5.0,),
           IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AccountScreen()));
           }, icon: Icon(Icons.person_outline_rounded,size: 30.0,color: Colors.white,),),
@@ -58,18 +58,25 @@ class ClubChapter extends StatelessWidget {
           child: SafeArea(
             child: SingleChildScrollView(
               child: Column(
-                children: [SizedBox(height: 30.0,),
-                  ShaderMask(
-                    blendMode: BlendMode.srcATop,
-                    shaderCallback: (bounds)=>LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
-                    ).createShader(bounds),
-                    child: Text('CLUBS & CHAPTERS',style: TextStyle(
-                      fontSize: 40.0, fontWeight: FontWeight.bold,fontFamily: 'Phudu'
-                    ),
-                    ),
+                children: [
+
+                  Row(mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('🔥',style: TextStyle(fontSize: 20),),
+                      SizedBox(width: 10,),
+                      ShaderMask(
+                        blendMode: BlendMode.srcATop,
+                        shaderCallback: (bounds)=>LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
+                        ).createShader(bounds),
+                        child: Text('CLUBS & CHAPTERS',style: TextStyle(
+                          fontSize: 30.0,fontFamily: 'Cubano'
+                        ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 30.0,),
                   SubHeadings(title: "TECHNICAL CLUBS",),//NON TECH HEADING
@@ -318,7 +325,7 @@ class ClubChapter extends StatelessWidget {
                                 onTap: (){
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => TechnicalClubPage(),
+                                    MaterialPageRoute(builder: (context) => NonTechnicalClubPage(),
                                   ),);
                                 },
                                 child: Column(
@@ -452,7 +459,7 @@ class ClubChapter extends StatelessWidget {
                                 onTap: (){
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => TechnicalClubPage()),
+                                    MaterialPageRoute(builder: (context) => ChapterPage()),
                                   );
                                 },
                                 child: Column(

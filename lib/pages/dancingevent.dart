@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sheet_db/components/event_card.dart';
 import 'package:google_sheet_db/pages/account.dart';
-import 'package:google_sheet_db/pages/cleaning_event.dart';
-import 'package:google_sheet_db/pages/coding_event.dart';
-import 'package:google_sheet_db/pages/dancingevent.dart';
 import 'package:google_sheet_db/pages/event_solo.dart';
-import 'package:google_sheet_db/pages/music_event.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,12 +20,12 @@ import 'package:intl/intl.dart';
 import '../pages/clubinfo.dart';
 User loggedInUser;
 
-class EventCards extends StatefulWidget {
+class DanceEvent extends StatefulWidget {
   @override
-  _EventCardsState createState() => _EventCardsState();
+  _DanceEventState createState() => _DanceEventState();
 }
 
-class _EventCardsState extends State<EventCards> {
+class _DanceEventState extends State<DanceEvent> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
@@ -61,16 +57,10 @@ class _EventCardsState extends State<EventCards> {
       });
     }
   }
-
-  final items = ['TODAY','THIS WEEK','THIS MONTH',];
   String value;
 
   @override
   Widget build(BuildContext context) {
-    List months =
-    ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MARCH','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
-    var time = DateTime.now();
-    var current_mon = time.month;
 
     DropdownMenuItem<String> buildMenuItem(String item)=> DropdownMenuItem(
         value: item,
@@ -82,11 +72,9 @@ class _EventCardsState extends State<EventCards> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        textTheme: TextTheme(),
-          iconTheme: IconThemeData(
+        iconTheme: IconThemeData(
             color: Colors.black
-          ),
-        automaticallyImplyLeading: false,
+        ),
         elevation: 0,
         title:Column(
           children: [
@@ -107,103 +95,7 @@ class _EventCardsState extends State<EventCards> {
         ),
         backgroundColor: Colors.transparent,
         actions: [
-          IconButton(onPressed: (){
-            showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder( // <-- SEE HERE
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(25.0),
-                  ),
-                ),
-                builder: (context) {
-                  return Container(
-                    height: 500,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          SizedBox(height: 10,),
-                          Text("What's Your plan for today?",style: TextStyle(fontFamily: 'Cubano',fontSize: 30.0),),
-                          SizedBox(height: 10.0,),
-                          Text("Choose your favourite activity from below :",style: TextStyle(fontFamily: 'Cubano',fontSize: 15.0,color: Colors.grey),),
-                          SizedBox(height: 10.0,),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                SizedBox(height: 5.0,),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CodingEvent()));
-                                      },
-                                        child: Text('🧑🏻‍💻',style: TextStyle(fontSize: 30),),
-                                      ),
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CodingEvent()));
-                                      }, child: Text('Coding & Technical',style: TextStyle(color: Colors.grey.shade700,fontSize: 20.0,fontFamily: 'Cubano'),))
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CleaningEvent()));
-                                      },
-                                        child: Text('🧹',style: TextStyle(fontSize: 30),),
-                                      ),
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CleaningEvent()));
-                                      }, child: Text('Cleaning and service',style: TextStyle(color: Colors.grey.shade700,fontSize: 20.0,fontFamily: 'Cubano'),))
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MusicEvent()));
-                                      },
-                                        child: Text('🎵',style: TextStyle(fontSize: 30),),
-                                      ),
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MusicEvent()));
-                                      }, child: Text('Music & Singing',style: TextStyle(color: Colors.grey.shade700,fontSize: 20.0,fontFamily: 'Cubano'),))
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DanceEvent()));
-                                      },
-                                        child: Text('🕺🏻',style: TextStyle(fontSize: 30),),
-                                      ),
-                                      TextButton(onPressed: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DanceEvent()));
-                                      }, child: Text('Dancing',style: TextStyle(color: Colors.grey.shade700,fontSize: 20.0,fontFamily: 'Cubano'),))
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                });
-          }, icon: Icon(Icons.settings_input_composite_outlined,size: 30.0,color: Colors.white,)),
+
           SizedBox(width: 5.0,),
           IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AccountScreen()));
@@ -225,14 +117,24 @@ class _EventCardsState extends State<EventCards> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('🗓️',style: TextStyle(fontSize: 25),),
+                  Text('🕺🏻',style: TextStyle(fontSize: 25),),
                   SizedBox(width: 10,),
-                  PageHeading(title: 'EVENTS'),
+                  ShaderMask(
+                    blendMode: BlendMode.srcATop,
+                    shaderCallback: (bounds)=>LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
+                    ).createShader(bounds),
+                    child: Text('DANCE EVENTS',style: TextStyle(
+                      fontSize: 20.0, fontWeight: FontWeight.normal,fontFamily: 'Cubano',
+                    ),
+                    ),
+                  ),
                 ],
               ),
-              Center(child: SubHeadings(title: '${months[current_mon-1]}',)),
               StreamBuilder(
-                stream: _firestore.collection('clubs').snapshots(),
+                stream: _firestore.collection('clubs').where('type',isEqualTo: 'dance').snapshots(),
                 builder: (context,snapshot){
                   if(!snapshot.hasData){
                     return Center(
@@ -301,16 +203,16 @@ class MessageBubble extends StatelessWidget {
           );
         },
         child: Container(
-    decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
 
-    border: GradientBoxBorder(
-    width: 3,
-    gradient: LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
-    ),),),
+            border: GradientBoxBorder(
+              width: 3,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
+              ),),),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

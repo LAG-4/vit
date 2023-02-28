@@ -1,11 +1,13 @@
 import 'dart:ui';
 
-import 'package:google_sheet_db/pages/clubsolo.dart';
+import 'package:google_sheet_db/pages/technicalpage.dart';
 import 'package:google_sheet_db/pages/events.dart';
 import 'package:google_sheet_db/pages/navbar.dart';
 import 'package:google_sheet_db/pages/login.dart';
 import 'package:google_sheet_db/pages/registration.dart';
 import 'package:google_sheet_db/pages/uploadpage.dart';
+import 'package:google_sheet_db/screens/onboding/onboding_screen.dart';
+
 import 'package:google_sheet_db/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'pages/events.dart';
@@ -29,8 +31,14 @@ class MyApp extends StatelessWidget {
         theme: MyThemes.lightTheme,
         darkTheme: MyThemes.darkTheme,
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        home:LoginScreen(),
     );
-      //hello
   }
 }
+const defaultInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.all(Radius.circular(16)),
+  borderSide: BorderSide(
+    color: Color(0xFFDEE3F2),
+    width: 1,
+  ),
+);

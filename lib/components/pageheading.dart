@@ -13,7 +13,7 @@ final String title;
         colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
       ).createShader(bounds),
       child: Text(title,style: TextStyle(
-          fontSize: 40.0, fontWeight: FontWeight.bold,fontFamily: 'Phudu'
+          fontSize: 40.0, fontWeight: FontWeight.normal,fontFamily: 'Cubano',
       ),
       ),
     );

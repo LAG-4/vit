@@ -7,8 +7,8 @@ class SubHeadings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(title,style:
     TextStyle(
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Phudu',
+      fontWeight: FontWeight.normal,
+      fontFamily: 'Cubano',
       fontSize: 20,
     ),
     );

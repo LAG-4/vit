@@ -19,12 +19,12 @@ import '../pages/clubinfo.dart';
 import 'account.dart';
 User loggedInUser;
 
-class TechnicalClubPage extends StatefulWidget {
+class ChapterPage extends StatefulWidget {
   @override
-  _TechnicalClubPageState createState() => _TechnicalClubPageState();
+  _ChapterPageState createState() => _ChapterPageState();
 }
 
-class _TechnicalClubPageState extends State<TechnicalClubPage> {
+class _ChapterPageState extends State<ChapterPage> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
@@ -54,6 +54,12 @@ class _TechnicalClubPageState extends State<TechnicalClubPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: BackButton(color: Colors.white,),
+        textTheme: TextTheme(),
+        iconTheme: IconThemeData(
+            color: Colors.black
+        ),
+        elevation: 0,
         title:Column(
           children: [
             ShaderMask(
@@ -64,17 +70,11 @@ class _TechnicalClubPageState extends State<TechnicalClubPage> {
                 colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
               ).createShader(bounds),
               child: Text('VIT-AP',style: TextStyle(
-                  fontFamily: 'Kavoon',fontSize: 19
+                  fontFamily: 'Cubano',fontSize: 19
               ),
               ),
             ),
-
-            Text('EVENTS',style: TextStyle(fontFamily: 'Poppins',fontSize: 10.0,fontWeight: FontWeight.bold,shadows: <Shadow>[
-              Shadow(
-                offset: Offset(3.0, 1.0),
-                blurRadius: 15.0,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),]),)
+            Text('EVENTS',style: TextStyle(fontFamily: 'Poppins',fontSize: 10.0,fontWeight: FontWeight.bold,),)
           ],
         ),
         backgroundColor: Colors.transparent,
@@ -97,11 +97,28 @@ class _TechnicalClubPageState extends State<TechnicalClubPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 90.0,),
-              PageHeading(title: "TECHNICAL-CLUBS",),
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('📖',style: TextStyle(fontSize: 30),),
+                  SizedBox(width: 10,),
+                  ShaderMask(
+                    blendMode: BlendMode.srcATop,
+                    shaderCallback: (bounds)=>LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.purple,Colors.lightBlueAccent,Colors.greenAccent],
+                    ).createShader(bounds),
+                    child: Text('CHAPTERS',style: TextStyle(
+                      fontSize: 30.0, fontWeight: FontWeight.normal,fontFamily: 'Cubano',
+                    ),
+                    ),
+                  ),
+                ],
+              ),
               //MAIN HEADING
               SizedBox(height: 10.0,),
               StreamBuilder(
-                stream: _firestore.collection('events').snapshots(),       //stream: _firestore.collection('events').limit(1).snapshots(),
+                stream: _firestore.collection('events').where('type',isEqualTo: 'chapter').snapshots(),       //stream: _firestore.collection('events').limit(1).snapshots(),
                 builder: (context,snapshot){
                   if(!snapshot.hasData){
                     return Center(
@@ -144,7 +161,7 @@ class _TechnicalClubPageState extends State<TechnicalClubPage> {
 }
 class ClubClass extends StatelessWidget {
   ClubClass({this.data});
-final data;
+  final data;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -168,7 +185,7 @@ final data;
               ),
             ),
           ),
-          Text(data['name'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.0,fontFamily: 'Phudu'),textAlign: TextAlign.center,),
+          Text(data['name'],style: TextStyle(color: Colors.white,fontSize: 25.0,fontFamily: 'Cubano'),textAlign: TextAlign.center,),
         ],
       ),
     );
